@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.cms.mapper.UnknownMapper">
+
+    <select id="getInfo" resultType="com.example.cms.bean.UnknownBean">
+        SELECT * FROM unknown WHERE person_name = #{name}
+    </select>
+
+    <select id="selectByPersonId" resultType="com.example.cms.bean.UnknownBean">
+        SELECT * FROM unknown WHERE person_id = #{personId}
+    </select>
+
+    <select id="getAll" resultType="com.example.cms.bean.UnknownBean">
+        SELECT * FROM unknown
+    </select>
+
+    <insert id="insert" parameterType="com.example.cms.bean.UnknownBean" >
+            INSERT ignore INTO unknown(enter_time,portrait)
+                                values (#{enter_time},#{portrait})
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>华工-人像大数据智能分析与识别管理系统</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/plugins/images/SCUT_LOGO.png">
+
+    <link href="../static/html/css/myStyle.css" rel="stylesheet">
+    <!--    <style>-->
+    <!--        div {-->
+    <!--            border: black solid 1px;-->
+    <!--        }-->
+    <!--    </style>-->
+</head>
+<body>
+
+
+<div class="sidenav">
+    <img src="../static/plugins/images/SCUT_LOGO.jpg" alt="home"/>
+    <ul>
+        <li><a href="#about">总览</a></li>
+        <li><a href="#about">消息</a></li>
+        <li><a href="#about">检索</a></li>
+        <li>
+            <ul class="secList">
+                <li><a class="active" href="#about">名单库检索</a></li>
+                <li><a href="/attendance-table">门禁记录</a></li>
+            </ul>
+        </li>
+        <li><a href="#about">数据库</a></li>
+        <li><a href="#about">设备</a></li>
+        <li><a href="#about">规则</a></li>
+        <li><a href="#about">任务</a></li>
+        <!--        <li><a class="active" href="#home">人员信息库</a></li>-->
+        <li><a href="#news">报告</a></li>
+        <li><a href="#contact">日志</a></li>
+        <li><a href="#about">账号</a></li>
+    </ul>
+</div>
+
+
+<div class="header m-l-200">
+
+    <!--        <img src="../static/plugins/images/SCUT_LOGO.jpg" alt="home"/>-->
+    <h3>华工-人像大数据智能分析与识别管理系统</h3>
+
+</div>
+
+
+<div class="content m-l-200">
+    <table>
+        <tr>
+            <th>#</th>
+            <th>姓名</th>
+            <th>手机号</th>
+            <th>小区</th>
+            <th>楼栋</th>
+            <th>人像</th>
+        </tr>
+        <tr th:each="person:${persons}">
+            <td th:text="${person.person_id}"></td>
+            <td th:text="${person.name}"></td>
+            <td th:text="${person.phoneNum}"></td>
+            <!--                <td th:text="${person.loginPassword}"></td>-->
+            <td th:text="${person.community}"></td>
+            <td th:text="${person.building}"></td>
+            <td>
+                <img th:src="@{/getPersonImg.do(phoneNum=${person.phoneNum})}" height="50" width="50"/>
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+
+<div class="footer m-l-200">
+    <h3>2020 xwlab</h3>
+</div>
+</body>
+</html>

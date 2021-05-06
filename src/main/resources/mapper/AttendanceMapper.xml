@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.cms.mapper.AttendanceMapper">
+
+    <select id="getAll" resultType="com.example.cms.bean.AttendanceBean">
+        SELECT * FROM attendance
+    </select>
+
+    <select id="selectByGateNum" resultType="com.example.cms.bean.AttendanceBean">
+        SELECT * FROM attendance WHERE gateNum = #{gateNum}
+    </select>
+
+    <insert id="insert" parameterType="com.example.cms.bean.AttendanceBean">
+        INSERT ignore INTO attendance(name,phoneNum,community,building,method,face)
+             values
+                (#{name},#{phoneNum},#{community},#{building},#{method},#{face})
+    </insert>
+
+    <select id="selectFaceByEnterTime" resultType="com.example.cms.bean.AttendanceBean">
+        SELECT face FROM attendance WHERE enterTime = #{enterTime}
+    </select>
+
+    <select id="selectAttendanceByEnterTime" resultType="com.example.cms.bean.AttendanceBean">
+        SELECT * FROM attendance WHERE enterTime = #{enterTime}
+    </select>
+
+    <select id="selectAttendanceByName" resultType="com.example.cms.bean.AttendanceBean">
+        SELECT * FROM attendance WHERE name = #{name}
+    </select>
+
+</mapper>

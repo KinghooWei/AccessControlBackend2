@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cms.mapper.KeyPersonnelMapper">
+
+    <select id="getAllKeyPersonnel" resultType="com.example.cms.bean.KeyPersonnelBean">
+        SELECT * FROM key_personnel
+    </select>
+
+</mapper>

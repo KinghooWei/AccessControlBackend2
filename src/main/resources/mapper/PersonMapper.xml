@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.cms.mapper.PersonMapper">
+
+    <select id="getInfo" resultType="com.example.cms.bean.PersonBean">
+        SELECT * FROM person WHERE name = #{name}
+    </select>
+
+    <select id="selectByPhoneNum" resultType="com.example.cms.bean.PersonBean">
+        SELECT * FROM person WHERE phoneNum = #{phoneNum}
+    </select>
+
+    <select id="getAll" resultType="com.example.cms.bean.PersonBean">
+        SELECT * FROM person
+    </select>
+
+    <select id="getPersonByAddressAndTime" resultType="com.example.cms.bean.PersonBean">
+        SELECT * FROM person WHERE community = #{community} and building = #{gate} and updateTime > #{lastUpdateTime}
+    </select>
+
+    <select id="getPersonByCommunityAndTime" resultType="com.example.cms.bean.PersonBean">
+        SELECT * FROM person WHERE community = #{community} and updateTime > #{lastUpdateTime}
+    </select>
+
+    <insert id="insert" parameterType="com.example.cms.bean.PersonBean">
+            INSERT ignore INTO person(name,phoneNum,loginPassword,community,building,roomId,communityPassword,buildingPassword,tempPassword,portrait,faceFeature,QRCode)
+                                values (#{name},#{phoneNum},#{loginPassword},#{community},#{building},#{roomId},#{communityPassword},#{buildingPassword},#{tempPassword},#{portrait},#{faceFeature},#{QRCode})
+    </insert>
+
+    <update id="updateLoginPassword" parameterType="com.example.cms.bean.PersonBean">
+         update person SET loginPassword=#{loginPassword}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateCommunity" parameterType="com.example.cms.bean.PersonBean">
+         update person SET community=#{community}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateBuilding" parameterType="com.example.cms.bean.PersonBean">
+         update person SET building=#{building}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateRoomId" parameterType="com.example.cms.bean.PersonBean">
+         update person SET roomId=#{roomId}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateCommunityPassword" parameterType="com.example.cms.bean.PersonBean">
+         update person SET communityPassword=#{communityPassword}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateBuildingPassword" parameterType="com.example.cms.bean.PersonBean">
+         update person SET buildingPassword=#{buildingPassword}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateTempPassword" parameterType="com.example.cms.bean.PersonBean">
+         update person SET tempPassword=#{tempPassword}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updatePortrait" parameterType="com.example.cms.bean.PersonBean">
+         update person SET portrait=#{portrait}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateFaceFeature" parameterType="com.example.cms.bean.PersonBean">
+         update person SET faceFeature=#{faceFeature}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateFaceImg" parameterType="com.example.cms.bean.PersonBean">
+         update person SET faceImg=#{faceImg}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateFace" parameterType="com.example.cms.bean.PersonBean">
+         update person SET faceImg=#{faceImg}, faceFeature=#{faceFeature}, featureWithMask=#{featureWithMask}, featureWithGlasses = #{featureWithGlasses}
+         where phoneNum=#{phoneNum}
+    </update>
+
+    <update id="updateQRCode" parameterType="com.example.cms.bean.PersonBean">
+         update person SET QRCode=#{QRCode}
+         where phoneNum=#{phoneNum}
+    </update>
+
+
+</mapper>

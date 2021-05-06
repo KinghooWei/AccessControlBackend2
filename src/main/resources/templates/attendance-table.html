@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--    <meta charset="utf-8">-->
+    <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!--    <meta name="description" content="">-->
+    <!--    <meta name="author" content="">-->
+    <!--    <link rel="icon" type="image/png" sizes="16x16" href="../static/plugins/images/favicon.png">-->
+    <!--    <title>Attendance System </title>-->
+    <!--    &lt;!&ndash; Bootstrap Core CSS &ndash;&gt;-->
+    <!--    <link href="../static/html/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--    &lt;!&ndash; Menu CSS &ndash;&gt;-->
+    <!--    <link href="../static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">-->
+    <!--    &lt;!&ndash; animation CSS &ndash;&gt;-->
+    <!--    <link href="../static/html/css/animate.css" rel="stylesheet">-->
+    <!--    &lt;!&ndash; Custom CSS &ndash;&gt;-->
+    <!--    <link href="../static/html/css/style.css" rel="stylesheet">-->
+    <!--    &lt;!&ndash; color CSS &ndash;&gt;-->
+    <!--    <link href="../static/html/css/colors/default.css" id="theme" rel="stylesheet">-->
+    <!--    &lt;!&ndash; HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries &ndash;&gt;-->
+    <!--    &lt;!&ndash; WARNING: Respond.js doesn't work if you view the page via file:// &ndash;&gt;-->
+    <!--    &lt;!&ndash;[if lt IE 9]>-->
+    <!--    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>华工-人像大数据智能分析与识别管理系统</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/plugins/images/SCUT_LOGO.png">
+
+    <link href="../static/html/css/myStyle.css" rel="stylesheet">
+
+    <![endif]-->
+</head>
+
+<body>
+<div class="sidenav">
+    <img src="../static/plugins/images/SCUT_LOGO.jpg" alt="home"/>
+    <ul>
+        <li><a href="#about">总览</a></li>
+        <li><a href="#about">消息</a></li>
+        <li><a href="#about">检索</a></li>
+        <!--        <li><a href="http://localhost:9999/test2">轨迹状态</a></li>-->
+        <li>
+            <ul class="secList">
+                <li><a href="/person-table">名单库检索</a></li>
+                <li><a class="active" href="/attendance-table">门禁记录</a></li>
+            </ul>
+        </li>
+        <li><a href="#about">数据库</a></li>
+        <li><a href="#about">设备</a></li>
+        <li><a href="#about">规则</a></li>
+        <li><a href="#about">任务</a></li>
+        <!--        <li><a class="active" href="#home">人员信息库</a></li>-->
+        <li><a href="#news">报告</a></li>
+        <li><a href="#contact">日志</a></li>
+        <li><a href="#about">账号</a></li>
+    </ul>
+</div>
+
+
+<div class="header m-l-200">
+
+    <!--        <img src="../static/plugins/images/SCUT_LOGO.jpg" alt="home"/>-->
+    <h3>华工-人像大数据智能分析与识别管理系统</h3>
+
+</div>
+
+
+<div class="content m-l-200">
+    <!--    <table class="table">-->
+    <!--        <tr>-->
+    <!--            <th>#</th>-->
+    <!--            <th>姓名</th>-->
+    <!--            <th>手机号</th>-->
+    <!--            <th>小区</th>-->
+    <!--            <th>楼栋</th>-->
+    <!--            <th>人像</th>-->
+    <!--        </tr>-->
+    <!--        <tr th:each="person:${persons}">-->
+    <!--            <td th:text="${person.person_id}"></td>-->
+    <!--            <td th:text="${person.name}"></td>-->
+    <!--            <td th:text="${person.phoneNum}"></td>-->
+    <!--            &lt;!&ndash;                <td th:text="${person.loginPassword}"></td>&ndash;&gt;-->
+    <!--            <td th:text="${person.community}"></td>-->
+    <!--            <td th:text="${person.building}"></td>-->
+    <!--            <td>-->
+    <!--                <img th:src="@{/getPersonImg.do(phoneNum=${person.phoneNum})}" height="50"-->
+    <!--                     width="50"/>-->
+    <!--            </td>-->
+
+    <!--        </tr>-->
+    <!--    </table>-->
+    <ul>
+        <li style="display: inline-block; margin: 0 20px 10px 0">
+            <form role="form" action="/qureyname" method="post">
+                <input style="width:120px;height: 30px" type="text" id="qurey2" name="qurey2">
+                <input type="submit" id="mingdan" value="门禁记录检索" style="padding: 6px">
+            </form>
+        </li>
+        <li style="display: inline-block">
+            <form role="form" action="/qureyway" method="post">
+                <input style="width:120px;height: 30px" type="text" id="qurey3" name="qurey3">
+                <input type="submit" id="guiji" value="轨迹库检索" style="padding: 6px">
+            </form>
+        </li>
+    </ul>
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>手机</th>
+            <th>小区</th>
+            <th>楼栋</th>
+            <th>时间</th>
+            <th>方式</th>
+            <th>照片捕捉<a href="/login"> 查看原图</a></th>
+        </tr>
+        <tr th:each="attendance:${attendances}">
+            <td th:text="${attendance.name}"></td>
+            <td th:text="${attendance.phoneNum}"></td>
+            <td th:text="${attendance.community}"></td>
+            <td th:text="${attendance.building}"></td>
+            <td th:text="${attendance.enterTime}"></td>
+            <td th:text="${attendance.method}"></td>
+            <td>
+                <img th:src="@{/getAttendanceImg.do(enterTime=${attendance.enterTime})}" height="50" width="50"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div class="footer m-l-200">
+    <h3>2020 xwlab</h3>
+</div>
+
+</body>
+
+</html>

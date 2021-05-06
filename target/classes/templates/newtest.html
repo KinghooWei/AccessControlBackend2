@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html,#allmap {overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+
+    <script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=wG6hobOYetkIT7UMD2YavftQKb81u4yT"></script>
+    <script type="text/javascript" src="//api.map.baidu.com/library/TrackAnimation/src/TrackAnimation_min.js"></script>
+    <title>视角动画</title>
+
+</head>
+<body>
+<div id="allmap" style=" height:765px;width:2000px;"></div>
+<div id="alltext "style=" height:235px;width:2000px;">
+    <table>
+        <tr>
+            <td>
+                <font size="5"> 追踪人员：</font><br/>
+            </td>
+            <td>
+                <font size="5" id='text3'> </font><br/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <font size="5"> 开始时间：</font><br/>
+            </td>
+            <td>
+                <font size="5" id='text4'> </font><br/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <font size="5"> 结束时间：</font><br/>
+            </td>
+            <td>
+                <font size="5" id='text5'> </font><br/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <font size="5"> 距离：</font><br/>
+            </td>
+            <td>
+                <font id='text1' size="5"> </font><br/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <font size="5"> 时间：</font><br/>
+            </td>
+            <td>
+                <font id='text2' size="5"> </font><br/>
+            </td>
+        </tr>
+        
+    </table>
+</div>
+</body>
+</html>
+<script th:inline="javascript">
+    // GL版命名空间为BMapGL
+    // 按住鼠标右键，修改倾斜角和角度
+    document.getElementById("text3").innerHTML =  [[${name}]];
+    document.getElementById("text4").innerHTML =  [[${firsttime}]];
+    document.getElementById("text5").innerHTML =  [[${lasttime}]];
+
+    var t1 = Date.parse(new Date([[${firsttime}]].replace(/-/g, "/")));
+
+    var t2 = Date.parse(new Date([[${lasttime}]].replace(/-/g, "/")));
+    document.getElementById("text2").innerHTML =  (t2 - t1)/1000 + '秒';
+
+    var result =[[${position}]];
+    var len=result.length;
+    var bmap = new BMapGL.Map("allmap");    // 创建Map实例
+    bmap.centerAndZoom(new BMapGL.Point(113.354575,23.158585),19);  // 初始化地图,设置中心点坐标和地图级别
+    bmap.enableScrollWheelZoom(true);     // 开启鼠标滚轮缩放
+
+    var myIcon1 = new BMapGL.Icon("../static/plugins/images/start.png", new BMapGL.Size(52, 70));
+    var myIcon2 = new BMapGL.Icon("../static/plugins/images/end.png", new BMapGL.Size(52, 78));
+    // 创建Marker标注，使用小车图标
+    var pt = new BMapGL.Point(result[0]*1, result[1]*1);
+    var marker1 = new BMapGL.Marker(pt, {
+        icon: myIcon1
+    });
+    var pt2 = new BMapGL.Point(result[len-2]*1, result[len-1]*1);
+    var marker2 = new BMapGL.Marker(pt2, {
+        icon: myIcon2
+    });
+
+    // var marker1 = new BMapGL.Marker(new BMapGL.Point(113.353704, 23.159208));
+    bmap.addOverlay(marker1);
+    bmap.addOverlay(marker2);
+    path = [{
+        'lng': result[0]*1,
+        'lat': result[1]*2
+    },{
+        'lng': result[2]*1,
+        'lat': result[3]*1
+    }, {
+        'lng': result[4]*1,
+        'lat': result[5]*1
+    }, {
+        'lng': result[6]*1,
+        'lat': result[7]*1
+    }, {
+        'lng': result[8]*1,
+        'lat': result[9]*1
+    }, {
+        'lng': result[10]*1,
+        'lat': result[11]*1
+    }];
+    var length=0;
+    for (var i = 0; i < len/2-1; i++) {
+        length+=getDistance(result[i*2]*1, result[i*2+1]*1,result[i*2+2]*1, result[i*2+3]*1);
+    }
+    document.getElementById("text1").innerHTML = Number((length*1000.00).toString().match(/^\d+(?:\.\d{0,2})?/))+"米";
+    function rad(d) {
+        return d * Math.PI / 180.0;
+    }
+    function getDistance(lat1, lng1, lat2, lng2) {
+
+        var radLat1 = rad(lat1);
+        var radLat2 = rad(lat2);
+        var a = radLat1 - radLat2;
+        var b = rad(lng1) - rad(lng2);
+        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
+            Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * 6378.137; // EARTH_RADIUS;
+        s = Math.round(s * 10000) / 10000; //输出为公里
+
+        var distance = s;
+        var distance_str = "";
+
+        if (parseInt(distance) >= 1) {
+            distance_str = distance.toFixed(1) + "km";
+        } else {
+            distance_str = distance * 1000 + "m";
+        }
+
+        //s=s.toFixed(4);
+
+        console.info('lyj 距离是', s);
+        console.info('lyj 距离是', distance_str);
+        return s;
+    }
+
+
+    // , {
+    //     'lng': 116.306487,
+    //         'lat': 40.058312
+    // }, {
+    //     'lng': 116.307223,
+    //         'lat': 40.056379
+    // }
+    // var labels = [
+    //     {position:{lng:113.353704,lat:23.159208},content:"时间1"},
+    //     {position:{lng:113.354836,lat:23.159163},content:"时间2"},
+    //     {position:{lng:113.354315,lat:23.158581},content:"时间3"}
+    // ];
+    var point = [];
+    // for (var i = 0; i < path.length; i++) {
+    //     point.push(new BMapGL.Point(path[i].lng, path[i].lat));
+    // }
+    for (var i = 0; i < len; i=i+2) {
+        point.push(new BMapGL.Point(result[i]*1, result[i+1]*1));
+        console.log(result[i]*1);
+        console.log(result[i+1]*1);
+    }
+    var pl = new BMapGL.Polyline(point, {
+        strokeColor: "red",
+        strokeWeight: 10,
+        strokeOpacity: 0.5
+    });
+    setTimeout(start(), 3000);
+    function start() {
+        trackAni = new BMapGLLib.TrackAnimation(bmap, pl, {
+            overallView: true,
+            tilt: 30,
+            duration: 20000,
+            delay: 300
+        });
+        trackAni.start();
+    }
+
+
+
+    // function sendText () {
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open('GET', 'http://localhost:9999/testvalue', true);
+    //     xhr.responseType = 'text';
+    //     xhr.onload = function (e) {
+    //         if (this.status == 200) {
+    //             var a=[];
+    //             a.push(this.response);
+    //             console.log(a.toString());
+    //             result = a.toString().split(',');
+    //             init();
+    //         }
+    //     };
+    //     xhr.send()
+    // }
+    //
+    // // console.log(result);
+    // // window.onload(sendText());
+    // // document.onload(sendText());
+    // sendText();
+
+</script>

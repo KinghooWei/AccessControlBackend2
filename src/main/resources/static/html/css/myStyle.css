@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.m-l-200 {
+    margin-left: 200px;
+}
+
+/* 头部标题 */
+.header {
+    background: white;
+    /*position: fixed;*/
+    /*width: 100%;*/
+    height: 80px;
+}
+
+.header h3 {
+    color: #6E9CCE;
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+}
+
+/* 侧边栏 */
+.sidenav {
+    position: fixed;
+    background-color: #fff;
+    width: 200px;
+    height: 100%;
+    text-align: center;
+    /*border-right: 1px solid #6E9CCE;*/
+    box-shadow: 5px 0 2px 2px #D6E2F2;
+}
+
+.sidenav img {
+    width: 80px;
+    /*height: 80px;*/
+    margin: 20px 0;
+}
+
+.sidenav ul{
+    text-align: left;
+    /*margin-top: 100px;*/
+    list-style-type: none;
+    /*margin: 0;*/
+    /*padding: 20px;*/
+}
+
+.sidenav li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+
+}
+
+.sidenav li a.active {
+    background-color: #6E9CCE;
+    color: white;
+}
+
+.sidenav li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+/* 二级列表 */
+.sidenav .secList {
+    background-color: #ccc;
+    padding-left: 35px;
+}
+
+/*.secList li {*/
+/*    padding-left: 40px;*/
+/*}*/
+
+/* 主体 */
+.content {
+    /*padding-top: 80px;*/
+    /*height: 100%;*/
+    padding: 0 20px;
+}
+
+.content table
+{
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    width:100%;
+    border-collapse:collapse;
+}
+.content table td, .content table th
+{
+    font-size:1.2em;
+    border-bottom:1px solid #6E9CCE;
+    padding:10px 0 10px 0;
+}
+.content table th
+{
+    /*position: fixed;*/
+    position: sticky;
+    top: 0;
+    font-size:1.4em;
+    text-align:left;
+    padding-top:12px;
+    padding-bottom:12px;
+    background-color:#6E9CCE;
+    color:#ffffff;
+}
+
+/* 页脚 */
+.footer {
+    /*float: bottom;*/
+    margin-top: 10px;
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer h3 {
+    font-weight: 400;
+}
+
+/*@media screen and (max-width: 900px) {*/
+/*    ul.sidenav {*/
+/*        width: 100%;*/
+/*        height: auto;*/
+/*        position: relative;*/
+/*    }*/
+/*    ul.sidenav li a {*/
+/*        float: left;*/
+/*        padding: 15px;*/
+/*    }*/
+/*    div.content {margin-left: 0;}*/
+/*}*/
+
+/*@media screen and (max-width: 400px) {*/
+/*    ul.sidenav li a {*/
+/*        text-align: center;*/
+/*        float: none;*/
+/*    }*/
+/*}*/
